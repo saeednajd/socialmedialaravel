@@ -45,7 +45,6 @@
                 <?php
                 // echo $singlepost[0]->title;
 
-use function PHPUnit\Framework\isEmpty;
 
                 ?>
         
