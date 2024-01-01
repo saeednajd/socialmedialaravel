@@ -4,7 +4,7 @@ use App\Http\Controllers\Mainindex;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
-
+use App\Http\Controllers\CommentsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +16,7 @@ use App\Http\Controllers\PostsController;
 |
 */
 
-Route::get('/',[Mainindex::class,'index']);
+Route::get('/',[Mainindex::class,'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
 Route::get('postsinglepage',[PostsController::class,'singlepostpage']
 )->name('postsinglepage');
 
+Route::post('newcomment',[CommentsController::class,'store']
+)->name('newcomment');
 
 
 require __DIR__.'/auth.php';

@@ -43,10 +43,7 @@
                 width:50vw; height: 5vh;box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;margin-top: 5vh;">
         </div>
         <div class="posts " style="width: 80vw;border: 5px solid red; display: flex;flex-wrap: wrap; flex-direction: row-reverse; margin: 5vh auto;">
-                @php
-                    
-                    session()->put('allposts', $allposts); // مقدار $allposts را در session ذخیره کنید
-                @endphp
+                
             <?php
             
                 foreach($allposts as $post){

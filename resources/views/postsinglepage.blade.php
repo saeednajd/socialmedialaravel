@@ -26,6 +26,9 @@
                 <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
                     @auth
                         <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">داشبورد</a>
+                        <span>/</span>
+                        <a href="{{ route('home') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">خانه</a>
+                        
                     @else
                         <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ورود</a>
                         <span>/</span>
@@ -84,14 +87,19 @@ use function PHPUnit\Framework\isEmpty;
             }
         </style>
         @auth
-                            <form action="/" method="get">
+                            <form action="{{Route('newcomment')}}" method="post">
                                 @csrf
                                 <label for="commnet" style="text-align: right;float: right; display: block;width: 50vw; margin: 0 5vw;">متن نظر خود را بنویسید</label>
                                 <input type="text" name="commnet" style="width: 70vw;border: 1px solid black; display: block;height: 10vh;margin: 0 auto;">
                                 <input class="subbtn" type="submit" value="ثبت نظر" >
+                                <input type="hidden" name="post_id" value=<?php echo $singlepost[0]->id; ?>>
                             </form>
                     @else
                         <h3 style="color: blue;text-align: center;">برای نظر دادن ابتدا واردشوید</h3>
                     @endauth
+
+            <div>
+               
+            </div>
     </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\comments;
 use App\Http\Requests\StorecommentsRequest;
 use App\Http\Requests\UpdatecommentsRequest;
+use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
@@ -27,11 +28,23 @@ class CommentsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorecommentsRequest $request)
+    public function store(Request $request)
     {
-        //
+        if(auth()->check()){
+            
+            
+            $result=comments::create([
+                'content' => $request->input('commnet'),
+                'post_id' => $request->input('post_id'),
+                'user_id' => auth()->user()->id,
+            ]);
+            
+            return redirect()->route('postsinglepage', ['id' => $request->input('post_id')]);
+        } else {
+            return redirect()->route('login');
+        }
+        
     }
-
     /**
      * Display the specified resource.
      */
