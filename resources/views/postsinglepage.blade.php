@@ -38,26 +38,60 @@
 
             
         </div>
-       <div>
-        @php
-            $postid = request()->get('postid');
-            $allposts = session()->get('allposts'); // مقدار $allposts را از session دریافت کنید
 
+                <?php
+                // echo $singlepost[0]->title;
+
+use function PHPUnit\Framework\isEmpty;
+
+                ?>
+        
+        <div class="post" style="width: 90vw;border: 5px solid black;  margin: 5vh auto;min-height: 25vh;">
             
-
-            @endphp
-
-
-
-       </div>
-       
-       <div class="singlepost" style="width: 20vw;border: 5px solid black;  margin: 5vh auto;height: 50vh;">
-                <h1 style="text-align: center; border-bottom: 1px solid black; padding: 2vh;">
-                <?php echo $post->title; ?> </h1>
-                <p style="text-align: center; margin-top: 5vh;"><?php echo $post->content; ?> </p>
-                <a href="{{Route('postsinglepage',['postid' => $post->id])}}" style="color: red; margin-top: 10vh;margin-left: 1vw;">مشاهده پست</a>
+            <h1 style="text-align: center; border-bottom: 1px solid black; padding: 2vh;">
+            <?php echo $singlepost[0]->title; ?> </h1>
+            <p style="text-align: center; margin-top: 5vh;"><?php echo $singlepost[0]->content; ?> </p>
+                
                 
 
+        </div>   
+        <div class="comments" style="width: 90vw; margin: 1vh auto;">
+                <h1 style="font-size: 2rem;">کامنت ها :</h1>
+            <?php
+            $temp =1;
+                foreach($thispostcomments as $comment){
+                    
+                    
+
+            ?>
+            <div style="border-bottom: 1px dotted red;min-height: 10vh;width: 100vw; margin: 1vh; float: right;text-align: right;">
+                <h3>نظر شماره : <?php echo $temp;?></h3>
+                <p><?php echo $comment->content;?></p>
             </div>
+            <?php
+            $temp+=1;    
+            }
+            ?>
+            
+        </div>
+        <style>
+            .subbtn{
+                border: 1px solid #ef4444;margin: 2vh 10vw;
+                padding: 0.5rem;
+            }
+            .subbtn:hover{
+                background-color: #ef4444;
+            }
+        </style>
+        @auth
+                            <form action="/" method="get">
+                                @csrf
+                                <label for="commnet" style="text-align: right;float: right; display: block;width: 50vw; margin: 0 5vw;">متن نظر خود را بنویسید</label>
+                                <input type="text" name="commnet" style="width: 70vw;border: 1px solid black; display: block;height: 10vh;margin: 0 auto;">
+                                <input class="subbtn" type="submit" value="ثبت نظر" >
+                            </form>
+                    @else
+                        <h3 style="color: blue;text-align: center;">برای نظر دادن ابتدا واردشوید</h3>
+                    @endauth
     </body>
 </html>

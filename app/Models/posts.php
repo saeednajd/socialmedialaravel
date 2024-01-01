@@ -10,8 +10,5 @@ class posts extends Model
     use HasFactory;
 
 
-    public static function getPostById($id)
-    {
-        return self::find($id);
-    }
+    
 }

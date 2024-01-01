@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\posts;
 use App\Http\Requests\StorepostsRequest;
 use App\Http\Requests\UpdatepostsRequest;
-
+use App\Models\comments;
+use Illuminate\Http\Request;
 class PostsController extends Controller
 {
     /**
@@ -41,12 +42,13 @@ class PostsController extends Controller
 
 
     }
-    public function singlepostpage(posts $posts)
+    public function singlepostpage(posts $posts,Request $request)
     {
-        $post = posts::getPostById($posts);
+        $post = posts::find($request);
+        // dd($request->postid);
+        $thispostcomments = comments::where('post_id', $request->postid)->get();
         $allposts=posts::all();
-        return view('postsinglepage',['allposts'=>$allposts,'singlepost'=>$post]);
-        
+        return view('postsinglepage',['allposts'=>$allposts,'singlepost'=>$post,'thispostcomments'=>$thispostcomments]);
 
     }
     /**
